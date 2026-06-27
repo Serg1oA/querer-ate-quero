@@ -63,7 +63,7 @@ function PledgeModal({ gift, onClose, onConfirm }: {
                 Comprar por inteiro — {fmt(remaining)}
               </button>
               <button onClick={() => setStep("partial")}
-                className="w-full py-3 rounded-xl border border-blue-200 text-sm text-slate-700 hover:bg-blue-50 transition-colors">
+                className="w-full py-3 rounded-xl border border-blue-200 text-sm text-slate-700 bg-white hover:bg-blue-50 transition-colors">
                 Contribuir parcialmente
               </button>
             </div>
