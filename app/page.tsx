@@ -17,7 +17,7 @@ export default function Home() {
     if (user && user !== "loading") router.replace("/dashboard");
   }, [user, router]);
 
-  if (user === "loading" || (user && user !== "loading")) return null;
+  if (user === "loading" || user) return null;
 
   return (
     <main className="min-h-screen flex items-center justify-center p-6">
