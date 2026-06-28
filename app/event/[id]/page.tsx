@@ -122,24 +122,24 @@ function GiftCard({ gift, isOwner, onPledge }: {
           onError={e => (e.currentTarget.style.display = "none")} />
       )}
       <div className="p-5 flex flex-col gap-3 flex-1">
-        <div className="flex items-start justify-between gap-2">
-          <div>
-            <h3 className="font-medium text-slate-800">{gift.name}</h3>
-            {gift.notes && (
-              <p className="text-xs text-slate-400 mt-0.5">
-                <Linkify 
-                  options={{ 
-                    target: '_blank', 
-                    rel: 'noopener noreferrer',
-                    className: 'text-blue-500 hover:underline cursor-pointer' // Tailwind styles for your links
-                  }}
-                >
-                  {gift.notes}
-                </Linkify>
-              </p>
-            )}
+        <div className="flex flex-col gap-0.5">
+          <div className="flex items-center justify-between gap-2">
+            <h3 className="font-medium text-slate-800 truncate">{gift.name}</h3>
+            <span className="text-sm font-semibold text-blue-700 shrink-0">{fmt(gift.price)}</span>
           </div>
-          <span className="text-sm font-semibold text-blue-700 shrink-0">{fmt(gift.price)}</span>
+          {gift.notes && (
+            <p title={gift.notes} className="text-xs text-slate-400 line-clamp-3 cursor-default">
+              <Linkify
+                options={{
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                  className: 'text-blue-500 hover:underline cursor-pointer'
+                }}
+              >
+                {gift.notes}
+              </Linkify>
+            </p>
+          )}
         </div>
         <div>
           <div className="h-1.5 bg-blue-50/50 rounded-full overflow-hidden">
