@@ -11,6 +11,7 @@ import {
   onSnapshot, addDoc, updateDoc, increment,
   serverTimestamp, Timestamp,
 } from "firebase/firestore";
+import Linkify from "linkify-react";
 
 type Event        = { title: string; date: Timestamp; place: string; ownerId: string; description?: string };
 type Gift         = { id: string; name: string; imageUrl?: string; price: number; notes?: string; amountPledged: number; fullyFunded: boolean };
@@ -124,7 +125,19 @@ function GiftCard({ gift, isOwner, onPledge }: {
         <div className="flex items-start justify-between gap-2">
           <div>
             <h3 className="font-medium text-slate-800">{gift.name}</h3>
-            {gift.notes && <p className="text-xs text-slate-400 mt-0.5">{gift.notes}</p>}
+            {gift.notes && (
+              <p className="text-xs text-slate-400 mt-0.5">
+                <Linkify 
+                  options={{ 
+                    target: '_blank', 
+                    rel: 'noopener noreferrer',
+                    className: 'text-blue-500 hover:underline cursor-pointer' // Tailwind styles for your links
+                  }}
+                >
+                  {gift.notes}
+                </Linkify>
+              </p>
+            )}
           </div>
           <span className="text-sm font-semibold text-blue-700 shrink-0">{fmt(gift.price)}</span>
         </div>
@@ -233,7 +246,7 @@ export default function EventPage() {
           <p className="text-sm text-slate-500 mt-1">{event.description}</p>
         )}
         {isOwner && (
-          <span className="mt-2 inline-block text-xs bg-blue-700 border border-blue-700 text-blue-700 px-2.5 py-1 rounded-full">
+          <span className="mt-2 inline-block text-xs bg-blue-700 border border-blue-700 text-white px-2.5 py-1 rounded-full">
             Vista do anfitrião
           </span>
         )}
@@ -277,8 +290,8 @@ export default function EventPage() {
                           <td className="px-5 py-3">
                             <span className={`text-xs px-2 py-0.5 rounded-full ${
                               c.type === "full"
-                                ? "bg-blue-700 border border-blue-700 text-blue-700"
-                                : "border border-blue-100 text-white"
+                                ? "bg-blue-700 border border-blue-700 text-white"
+                                : "border border-blue-100 text-blue-700"
                             }`}>
                               {c.type === "full" ? "Inteiro" : "Parcial"}
                             </span>
